@@ -2,9 +2,9 @@ const Bot = require('keybase-bot')
 require('dotenv').config()
 const readable = require("readable-url");
 var generator = new readable();
+const bot = new Bot()
 
 async function main() {
-    const bot = new Bot()
     try {
         // init
         const username = process.env.KB_USERNAME
