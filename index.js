@@ -2,9 +2,10 @@ const Client = require('keybase-bot')
 require('dotenv').config()
 const readable = require("readable-url");
 var generator = new readable();
-const bot = new Client();
 
 async function main() {
+    const bot = new Client();
+
     try {
         // init
         const username = process.env.KB_USERNAME
@@ -23,17 +24,27 @@ async function main() {
                             description: 'Generates a random URL for a Jitsi meeting.'
                             // usage: ''
                         },
+                        {
+                            name: 'ping',
+                            description: 'Returns the current latency between the bot and the server (returns pong for now because API doesn\'t have a ping property)'
+                        }
                     ],
                 },
             ],
         })
 
-        const onMessage = async message => {
+        const onMessage = async msg => {
             var url = generator.generate();
 
-            if (message.content.text.body === "!jitsi meet ") {
-                bot.chat.send(message.conversationId, {
+            if (msg.content.text.body == "!jitsimeet" || msg.content.text.body == "!jitsimeet ") {
+                bot.chat.send(msg.conversationId, {
                     body: "https://meet.jit.si/" + url
+                })
+            }
+
+            if (msg.content.text.body === "!ping" || msg.content.text.body === "!ping " ) {
+                bot.chat.send(msg.conversationId, {
+                    body: ":table_tennis_paddle_and_ball: Pong"
                 })
             }
         }
