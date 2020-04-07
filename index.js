@@ -1,4 +1,4 @@
-const Bot = require('keybase-bot')
+const client = require('keybase-bot')
 require('dotenv').config()
 const readable = require("readable-url");
 var generator = new readable();
